@@ -1,5 +1,6 @@
 package au.edu.swin.sdmd.core1
 
+import android.graphics.Color
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -68,6 +69,14 @@ class MainActivity : AppCompatActivity() {
             if(laps.text.toString().toInt() == 15){
                 mediaPlayer.start()
             }
+            // Handle text colour
+            if (laps.text.toString().toInt() in 5..9){
+                laps.setTextColor(Color.RED)
+            }else if (laps.text.toString().toInt() in 10..15){
+                laps.setTextColor(Color.BLUE)
+            }else{
+                laps.setTextColor(Color.BLACK)
+            }
         }
 
         val lapMinus = findViewById<Button>(R.id.lapMinus)
@@ -76,6 +85,14 @@ class MainActivity : AppCompatActivity() {
             opResult = laps.text.toString().toInt()
             if(laps.text.toString().toInt() == 15){
                 mediaPlayer.start()
+            }
+            // Handle text colour
+            if (laps.text.toString().toInt() in 5..9){
+                laps.setTextColor(Color.RED)
+            }else if (laps.text.toString().toInt() in 10..15){
+                laps.setTextColor(Color.BLUE)
+            }else{
+                laps.setTextColor(Color.BLACK)
             }
         }
 
