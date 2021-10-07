@@ -49,57 +49,55 @@ class MainActivity : AppCompatActivity() {
         //mediaPlayer.start()
 
         val laps = findViewById<TextView>(R.id.laps)
-        /*
-        savedInstanceState?.let{
-            opResult = it.getInt("LAPS")
-            laps.text = opResult.toString()
-        }
-        */
+
         if(savedInstanceState != null){
             opResult = savedInstanceState.getInt("LAPS")
             laps.text = opResult.toString()
+            when(laps.text.toString().toInt()){
+                in 5..9 -> laps.setTextColor(Color.RED)
+                in 10..15 -> laps.setTextColor(Color.BLUE)
+                else -> laps.setTextColor(Color.BLACK)
+            }
         }else{
             laps.text = 0.toString()
+            laps.setTextColor(Color.BLACK)
         }
 
         val lapAdd = findViewById<Button>(R.id.lapAdd)
         lapAdd.setOnClickListener {
-            laps.text = (laps.text.toString().toInt() + 1).toString()
+            if (laps.text.toString().toInt() < 15){
+                laps.text = (laps.text.toString().toInt() + 1).toString()
+            }
+            // Handle text colour and media player
+            when(laps.text.toString().toInt()){
+                in 5..9 -> laps.setTextColor(Color.RED)
+                in 10..15 -> laps.setTextColor(Color.BLUE)
+                15 -> mediaPlayer.start()
+                else -> laps.setTextColor(Color.BLACK)
+            }
             opResult = laps.text.toString().toInt()
-            if(laps.text.toString().toInt() == 15){
-                mediaPlayer.start()
-            }
-            // Handle text colour
-            if (laps.text.toString().toInt() in 5..9){
-                laps.setTextColor(Color.RED)
-            }else if (laps.text.toString().toInt() in 10..15){
-                laps.setTextColor(Color.BLUE)
-            }else{
-                laps.setTextColor(Color.BLACK)
-            }
         }
 
         val lapMinus = findViewById<Button>(R.id.lapMinus)
         lapMinus.setOnClickListener {
-            laps.text = (laps.text.toString().toInt() - 1).toString()
+            if (laps.text.toString().toInt() > 0){
+                laps.text = (laps.text.toString().toInt() - 1).toString()
+            }
+             // Handle text colour and media player
+            when(laps.text.toString().toInt()){
+                in 5..9 -> laps.setTextColor(Color.RED)
+                in 10..15 -> laps.setTextColor(Color.BLUE)
+                15 -> mediaPlayer.start()
+                else -> laps.setTextColor(Color.BLACK)
+            }
             opResult = laps.text.toString().toInt()
-            if(laps.text.toString().toInt() == 15){
-                mediaPlayer.start()
-            }
-            // Handle text colour
-            if (laps.text.toString().toInt() in 5..9){
-                laps.setTextColor(Color.RED)
-            }else if (laps.text.toString().toInt() in 10..15){
-                laps.setTextColor(Color.BLUE)
-            }else{
-                laps.setTextColor(Color.BLACK)
-            }
         }
 
         val lapReset = findViewById<Button>(R.id.lapReset)
         lapReset.setOnClickListener {
             laps.text = 0.toString()
             opResult = laps.text.toString().toInt()
+            laps.setTextColor(Color.BLACK)
         }
     }
 
